@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Secret Folder
+.secret/
+
+#Artifacts Folder
+artifacts/
+
+#Cache Folder
+cache/
+
