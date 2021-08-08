@@ -6,6 +6,30 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
-    "hardhat": "^2.2.1"
+    "hardhat": "^2.6.0"
+  },
+  "name": "amaze-token",
+  "description": "AMZE is utility tokens of Amaze World. Amaze World is tourist attraction with World's Biggest Mirror Maze and Multiple attraction around the world. Amaze World Services would be provided through entry tickets and providing a pleasant enviroment to the people visitng the facility. All the transactions and facilities inside the Amaze World can be accessed through AMZE only. AMZE will be and official token for accesing the Amaze World.",
+  "version": "1.0.0",
+  "main": "hardhat.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmazeWorld/amaze-token.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmazeWorld/amaze-token/issues"
+  },
+  "homepage": "https://github.com/AmazeWorld/amaze-token#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0"
   }
 }

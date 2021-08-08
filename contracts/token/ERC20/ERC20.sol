@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.6;
 
 import "./IERC20.sol";
 import "./extensions/IERC20Metadata.sol";
@@ -39,6 +39,15 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
     string private _name;
     string private _symbol;
+
+    struct TimeLock {
+        uint256 totalAmount;
+        uint256 lockedAmount;
+        uint128 startDate; // Unix Epoch timestamp
+        uint64 timeInterval; // Unix Epoch timestamp
+        uint256 tokenRelease;
+    }
+    mapping (address => TimeLock) public timeLocks;     
 
     /**
      * @dev Sets the values for {name} and {symbol}.
@@ -109,6 +118,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * - the caller must have a balance of at least `amount`.
      */
     function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+        require(amount <= (_balances[_msgSender()] - timeLocks[_msgSender()].lockedAmount));
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
@@ -150,6 +160,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
         uint256 currentAllowance = _allowances[sender][_msgSender()];
         require(currentAllowance >= amount, "ERC20: transfer amount exceeds allowance");
+        require(amount <= (_balances[_msgSender()] - timeLocks[_msgSender()].lockedAmount));
         _approve(sender, _msgSender(), currentAllowance - amount);
 
         return true;
