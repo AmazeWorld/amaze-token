@@ -112,3 +112,11 @@ artifacts/
 #Cache Folder
 cache/
 
+# misc
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+

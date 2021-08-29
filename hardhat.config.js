@@ -3,7 +3,8 @@
  */
  require('@nomiclabs/hardhat-ethers');
  require('@nomiclabs/hardhat-etherscan');
- 
+ require('hardhat-ethernal');
+
 const { alchemyAPIkeyRinkeby } = require('./.secret/secrets.json');
 const { bsctestnetPrivateKey } = require('./.secret/secrets.json');
 const { rinkebyPrivateKey } = require('./.secret/secrets.json');
@@ -27,10 +28,10 @@ const { etherscanAPIkey } = require('./.secret/secrets.json');
   * @type import('hardhat/config').HardhatUserConfig
   */
  module.exports = {
-   defaultNetwork: "bsctestnet",
+   defaultNetwork: "hardhat",
    networks: {
      localhost: {
-       url: "http://127.0.0.1:8545"
+      //url: "http://127.0.0.1:8545"
      },
      hardhat: {
      },

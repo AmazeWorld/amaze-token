@@ -1,6 +1,7 @@
 async function main() {
 
     const [deployer] = await ethers.getSigners();
+    const ethernal = require('hardhat-ethernal');
   
     console.log(
       "Deploying contracts with the account:",
@@ -13,7 +14,11 @@ async function main() {
     const _amzeToken = await AMZEToken.deploy();
   
     console.log("Token address:", _amzeToken.address);
-    
+    await hre.ethernal.push({
+      name: 'AMZEToken',
+      address: _amzeToken.address
+    });
+
     const ownerBalance = (await _amzeToken.balanceOf(deployer.address)).toString();
     console.log("Token Balance:", ownerBalance);
   }
