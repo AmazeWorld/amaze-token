@@ -109,7 +109,7 @@ contract AMZEToken is Ownable, AccessControl, Pausable, ERC20, ERC20Snapshot {
         }
     }
 
-    function sendLockedTokens(address recipient, uint totalAmount, uint256 lockedAmount, uint128 startDate, uint64 timeInterval, uint256 tokenRelease) public onlyOwner{
+    function transferLockedTokens(address recipient, uint totalAmount, uint256 lockedAmount, uint128 startDate, uint64 timeInterval, uint256 tokenRelease) public onlyOwner{
         timeLocks[recipient].push(TimeLock(totalAmount, lockedAmount, uint128(startDate), timeInterval, tokenRelease));
         transfer(recipient, totalAmount);
     }
