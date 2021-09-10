@@ -13,7 +13,7 @@ contract AMZEToken is Ownable, AccessControl, Pausable, ERC20, ERC20Snapshot {
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     bytes32 public constant CONTRACT_MANAGER_ROLE = keccak256("CONTRACT_MANAGER_ROLE");
     bytes32 public constant RISK_MANAGER_ROLE = keccak256("RISK_MANAGER_ROLE");
-    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
+    bytes32 public constant EXECUTOR_ROLE = keccak256("EXECUTOR_ROLE");
     bytes32 public constant WHITELISTER_ROLE = keccak256("WHITELISTER_ROLE");
 
     uint256 private immutable _totalCap = 90000000 * (10 ** uint256(decimals()));
@@ -31,7 +31,6 @@ contract AMZEToken is Ownable, AccessControl, Pausable, ERC20, ERC20Snapshot {
     uint256 public whiteListCount;
     mapping(address => bool) public isBlackListed;
     mapping(address => bool) public isWhiteListed;
-    mapping(address => bool) public whiteListManager;
 
     struct TimeLock {
         uint256 totalAmount;
@@ -174,7 +173,7 @@ contract AMZEToken is Ownable, AccessControl, Pausable, ERC20, ERC20Snapshot {
      }        
 
     function transferLockedTokens(address recipient, uint totalAmount, uint256 lockedAmount, uint128 startDate, uint64 timeInterval, uint256 tokenRelease) public {
-        require(hasRole(MANAGER_ROLE, _msgSender()), "Caller is not a manager");
+        require(hasRole(EXECUTOR_ROLE, _msgSender()), "Caller is not a executor");
         timeLocks[recipient].push(TimeLock(totalAmount, lockedAmount, uint128(startDate), timeInterval, tokenRelease));
         transfer(recipient, totalAmount);
     }
